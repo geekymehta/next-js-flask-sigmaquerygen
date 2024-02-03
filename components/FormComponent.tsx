@@ -5,16 +5,25 @@ import "./FormComponent.css"; // Import the updated CSS file
 import MultiSelectDropdown from "./MultiSelectDropdown";
 import { useState } from "react";
 
-const FormComponent = ({ target, format, pipeline, rule, onInputChange }) => {
+type FormComponentProps = { 
+  target: string;
+  format: string;
+  pipeline: string[];
+  rule: string;
+  onInputChange: (name: string, value: any) => void;
+};
+
+
+const FormComponent = ({ target, format, pipeline, rule, onInputChange }: FormComponentProps) => {
   const [selectedOptions, setSelectedOptions] = useState(pipeline);
 
-  const handleSelectedOptionsChange = (options) => {
+  const handleSelectedOptionsChange = (options:any) => {
     setSelectedOptions(options);
     onInputChange("pipeline", options); // Pass the updated options directly
   };
 
   return (
-    <form className="form-component-container">
+    <form className="flex flex-row flex-wrap">
       <div>
         <label>
           Backend:
@@ -59,11 +68,9 @@ const FormComponent = ({ target, format, pipeline, rule, onInputChange }) => {
       <div>
         <label>
           Rule:
-          <textarea
+          <textarea className="w-full h-full"
             name="rule-input"
-            rows="15"
-            cols="50"
-            type="text"
+            typeof="text"
             value={rule}
             onChange={(event) => onInputChange("rule", event.target.value)}
           />

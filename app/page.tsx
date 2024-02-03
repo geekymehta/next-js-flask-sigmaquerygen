@@ -6,7 +6,9 @@ import ErrorComponent from '@/components/ErrorComponent';
 import LoadingComponent from '@/components/LoadingComponent';
 import QueryComponent from '@/components/QueryComponent';
 import useQueryGenerator from '@/hooks/useQueryGenerator';
-import "./Home.css"
+// import Button from '@/components/new-components/Button';
+// import "./Home.css"
+
 
 export default function Home() {
   const [target, setTarget] = useState("splunk");
@@ -14,24 +16,23 @@ export default function Home() {
   const [pipeline, setPipeline] = useState([]);
   const [rule, setRule] = useState("");
   const [shouldFetch, setShouldFetch] = useState(false);
-
-  const { query, loading, error, fetchData } = useQueryGenerator(
-    target,
-    format,
-    pipeline,
-    rule
-  );
-
-  console.log("target1 ;skdkl ,s m,dam")
+  
+  const { query, loading, error, fetchData } = useQueryGenerator({
+      target,
+      format,
+      pipeline,
+      rule,
+    });
+  
   console.log("query1", query)
-
+  
   useEffect(() => {
     if (shouldFetch) {
       fetchData();
       setShouldFetch(false); // Reset the flag after fetching
     }
   }, [target, format, pipeline, rule, fetchData, shouldFetch]);
-
+  
   const handleInputChange = (name: string, value: any) => {
     switch (name) {
       case "target":
@@ -56,10 +57,10 @@ export default function Home() {
   };
 
   return (
-    <div className="App">
-      <div className="app-container">
-        <div className="form-container">
-          <div className="title">Ruleset Configurations</div>
+    <div className="" >
+      <div className="grid grid-cols-2 gap-4 m-5 justify-center h-[90vh]" data-theme="cyberpunk">
+        <div className="">
+          <div className="">Ruleset Configurations</div>
           <FormComponent
             target={target}
             format={format}
@@ -69,8 +70,8 @@ export default function Home() {
           />
         </div>
 
-        <div className="result-container">
-          <div className="title">Query</div>
+        <div className="">
+          <div className="">Query</div>
           {loading && <LoadingComponent />}
           {error && <ErrorComponent error={error} />}
           {!loading && !error && query && <QueryComponent query={query} />}

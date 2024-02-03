@@ -1,6 +1,11 @@
 import { useState, useCallback } from "react";
-
-const useQueryGenerator = (target, format, pipeline, rule) => {
+type RuleConfig = { 
+  target: string;
+  format: string;
+  pipeline: string[];
+  rule: string;
+};
+const useQueryGenerator = ({target, format, pipeline, rule}: RuleConfig) => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -35,7 +40,7 @@ const useQueryGenerator = (target, format, pipeline, rule) => {
       const data = await response.text();
       console.log("Response Text:", data);
       setQuery(data);
-    } catch (error) {
+    } catch (error: any) {
       setError(error.message || "An error occurred");
       console.error("Fetch error:", error);
     } finally {
