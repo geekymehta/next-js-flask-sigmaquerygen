@@ -1,0 +1,44 @@
+
+.form-component-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  max-width: 400px; 
+  margin: 0 auto; 
+  padding: 10px;
+}
+
+.form-component-container label {
+  margin-bottom: 10px;
+}
+
+.form-component-container select,
+.form-component-container textarea {
+  width: calc(100% - 16px);
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-component-container textarea {
+  height: 150px; 
+}
+
+@media (min-width: 768px) {
+  .form-component-container {
+    max-width: 600px;
+  }
+
+  .form-component-container textarea {
+    height: 200px;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .form-component-container {
+    max-width: 800px; 
+  }
+}
